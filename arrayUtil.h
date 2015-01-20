@@ -1,6 +1,6 @@
 struct ArrayUtil{
 	void *basePtr;
-	int size;
+	int typeSize;
 	int length;
 };
 

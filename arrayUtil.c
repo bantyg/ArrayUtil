@@ -27,7 +27,7 @@ int areEqual(struct ArrayUtil a1,struct ArrayUtil a2){
 }
 
 struct ArrayUtil resize(struct ArrayUtil a1,int newlength){
-	void *arr1,*arr2;
+	void *arr1;
 	int i;
 	int lengthDiff = newlength - a1.length;
 	int newSize = a1.size * newlength;
@@ -38,6 +38,8 @@ struct ArrayUtil resize(struct ArrayUtil a1,int newlength){
 		{
 			((int *)(arr1))[i] = 0;
 		}
+		a1.length = newlength;
 	}
+	a1.length = newlength;
 	return a1;
 }

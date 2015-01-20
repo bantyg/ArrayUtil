@@ -6,8 +6,7 @@
 
 
 void test_to_compare_two_int_array(){
-	int size = 4,length = 3;
-	int *array1,*array2;
+	int size = 4,length = 3,*array1,*array2;
 	struct ArrayUtil a1,a2;
 	array1 = calloc(length,size);
 	array2 = calloc(length, size);
@@ -59,10 +58,8 @@ void test_to_compare_two_float_array(){
 
 
 void test_to_create_int_array(){
-	int size = 4;
-	int length = 3;
+	int size = 4,length = 3,*result;
 	struct ArrayUtil array = create(size,length);
-    int *result;
     result=(int*)array.basePtr;
 	assertEqual(*result,0);
 	assertEqual(*(result+1),0);
@@ -73,8 +70,7 @@ void test_to_create_int_array(){
 
 
 void test_to_create_char_array(){
-	int size = 1;
-	int length = 4;
+	int size = 1,length = 4;
 	struct ArrayUtil array = create(size,length);
     char *result;
     result=(char*)array.basePtr;
@@ -86,10 +82,8 @@ void test_to_create_char_array(){
 
 
 void test_to_create_int_with_array_diffferent_size(){
-	int size = 3;
-	int length = 4;
+	int size = 3,length = 4,*result;
 	struct ArrayUtil array = create(size,length);
-    int *result;
     result=(int*)array.basePtr;
 	assertEqual(*result,0);
 	assertEqual(*(result+1),0);
@@ -99,8 +93,7 @@ void test_to_create_int_with_array_diffferent_size(){
 }	
 
 void test_to_change_the_size_of_array(){
-	int size = 4,length = 3,newLength = 5;
-	int *array1;
+	int size = 4,length = 3,newLength = 5,*array1;
 	struct ArrayUtil a1,a2;
 	array1 = calloc(length,size);
 	array1[0] = 1;
@@ -121,8 +114,7 @@ void test_to_change_the_size_of_array(){
 }
 
 void test_to_change_the_size_of_array_to_small_array(){
-	int size = 4,length = 5,newLength = 3;
-	int *array1;
+	int size = 4,length = 5,newLength = 3, *array1;
 	struct ArrayUtil a1,a2;
 	array1 = calloc(length,size);
 	array1[0] = 1;
@@ -132,12 +124,7 @@ void test_to_change_the_size_of_array_to_small_array(){
 	a1.basePtr = array1;
 	a1.size = size;
 	a1.length = length;
-
-	assertEqual(((int *)(a1.basePtr))[0],1);
-	assertEqual(((int *)(a1.basePtr))[1],2);
-	assertEqual(((int *)(a1.basePtr))[2],3);
-	assertEqual(((int *)(a1.basePtr))[3],0);
-	assertEqual(((int *)(a1.basePtr))[4],0);
+	
 	a2 = resize(a1,newLength);
 	a2.basePtr = array1;
 	assertEqual(((int *)(a2.basePtr))[0],1);

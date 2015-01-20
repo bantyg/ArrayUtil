@@ -6,3 +6,4 @@ struct ArrayUtil{
 
 struct ArrayUtil create(int,int);
 int areEqual(struct ArrayUtil a1,struct ArrayUtil a2);
+struct ArrayUtil resize(struct ArrayUtil a1,int);

@@ -97,3 +97,73 @@ void test_to_create_int_with_array_diffferent_size(){
 	assertEqual(array.size,3);
 	assertEqual(sizeof(*(result+2)),4);
 }	
+
+void test_to_change_the_size_of_array(){
+	int size = 4,length = 3,newLength = 5;
+	int *array1;
+	struct ArrayUtil a1,a2;
+	array1 = calloc(length,size);
+	array1[0] = 1;
+	array1[1] = 2;
+	array1[2] = 3;
+
+	a1.basePtr = array1;
+	a1.size = size;
+	a1.length = length;
+	a2 = resize(a1,newLength);
+	a2.basePtr = array1;
+	assertEqual(((int *)(a2.basePtr))[0],1);
+	assertEqual(((int *)(a2.basePtr))[1],2);
+	assertEqual(((int *)(a2.basePtr))[2],3);
+	assertEqual(((int *)(a2.basePtr))[3],0);
+	assertEqual(((int *)(a2.basePtr))[4],0);
+
+}
+
+void test_to_change_the_size_of_array_to_small_array(){
+	int size = 4,length = 5,newLength = 3;
+	int *array1;
+	struct ArrayUtil a1,a2;
+	array1 = calloc(length,size);
+	array1[0] = 1;
+	array1[1] = 2;
+	array1[2] = 3;
+
+	a1.basePtr = array1;
+	a1.size = size;
+	a1.length = length;
+
+	assertEqual(((int *)(a1.basePtr))[0],1);
+	assertEqual(((int *)(a1.basePtr))[1],2);
+	assertEqual(((int *)(a1.basePtr))[2],3);
+	assertEqual(((int *)(a1.basePtr))[3],0);
+	assertEqual(((int *)(a1.basePtr))[4],0);
+	a2 = resize(a1,newLength);
+	a2.basePtr = array1;
+	assertEqual(((int *)(a2.basePtr))[0],1);
+	assertEqual(((int *)(a2.basePtr))[1],2);
+	assertEqual(((int *)(a2.basePtr))[2],3);
+}
+
+
+void test_to_change_the_size_of_float_array(){
+	int size = 4,length = 3,newLength = 5;
+	float *array1;
+	struct ArrayUtil a1,a2;
+	array1 = calloc(length,size);
+	array1[0] = 1.1;
+	array1[1] = 2.1;
+	array1[2] = 3.1;
+
+	a1.basePtr = array1;
+	a1.size = size;
+	a1.length = length;
+	a2 = resize(a1,newLength);
+	a2.basePtr = array1;
+	assertEqual(((float *)(a2.basePtr))[0],(float)1.1);
+	assertEqual(((float *)(a2.basePtr))[1],(float)2.1);
+	assertEqual(((float *)(a2.basePtr))[2],(float)3.1);
+	assertEqual(((float *)(a2.basePtr))[3],0);
+	assertEqual(((float *)(a2.basePtr))[4],0);
+}
+

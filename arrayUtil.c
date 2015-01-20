@@ -25,3 +25,19 @@ int areEqual(struct ArrayUtil a1,struct ArrayUtil a2){
 	return flag;
 
 }
+
+struct ArrayUtil resize(struct ArrayUtil a1,int newlength){
+	void *arr1,*arr2;
+	int i;
+	int lengthDiff = newlength - a1.length;
+	int newSize = a1.size * newlength;
+	a1.basePtr = realloc(a1.basePtr,newSize);
+	arr1 = a1.basePtr;
+	if(lengthDiff > 0){
+		for (i = a1.length; i < newlength; i++)
+		{
+			((int *)(arr1))[i] = 0;
+		}
+	}
+	return a1;
+}

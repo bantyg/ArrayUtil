@@ -4,38 +4,39 @@
 #include <string.h>
 
 
-struct ArrayUtil create(int size,int length){
-	struct ArrayUtil newArray;
+ArrayUtil create(int size,int length){
+	ArrayUtil newArray;
 	newArray.typeSize = size;
 	newArray.length = length;
-    newArray.basePtr =calloc(length, size);
+    newArray.base =calloc(length, size);
 	return newArray;
 }
 
-int areEqual(struct ArrayUtil a1,struct ArrayUtil a2){
+int areEqual(ArrayUtil a1,ArrayUtil a2){
 	int i,flag = 0;
-	if(a1.typeSize == a2.typeSize && a1.length == a2.length){
-		flag = 1;
+	char *a1Base = (char *)a1.base;
+	char *a2Base = (char *)a2.base;
+	if(a1.typeSize != a2.typeSize || a1.length != a2.length){
+		return 0;
+	}
+	else{
 		for(i=0;i<(a1.typeSize * a1.length);i++){
-			if(((char *)a1.basePtr)[i] !=((char *)a2.basePtr)[i])
-				flag = 0;
-				break;
+			if(a1Base[i] != a2Base[i])
+				return 0;
 		}
 	}
-	return flag;
-
+	return 1;
 }
 
-struct ArrayUtil resize(struct ArrayUtil a1,int newlength){
-	void *arr1,*arr2;
+
+ArrayUtil resize(ArrayUtil a1,int newlength){
+	void *arr1;
 	int i;
-	int lengthDiff = newlength - a1.length;
 	int newSize = a1.typeSize * newlength;
-	a1.basePtr = realloc(a1.basePtr,newSize);
-	arr1 = a1.basePtr;
-	if(lengthDiff > 0){
-		for (i = a1.length; i < newlength; i++)
-		{
+	a1.base = realloc(a1.base,newSize);
+	arr1 = a1.base;
+	if(newlength > a1.length){
+		for (i = a1.length; i < newlength; i++){
 			((int *)(arr1))[i] = 0;
 		}
 		a1.length = newlength;

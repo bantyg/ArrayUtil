@@ -1,9 +1,9 @@
-struct ArrayUtil{
-	void *basePtr;
+typedef struct ArrayUtil{
+	void *base;
 	int typeSize;
 	int length;
-};
+}ArrayUtil;
 
-struct ArrayUtil create(int,int);
-int areEqual(struct ArrayUtil a1,struct ArrayUtil a2);
-struct ArrayUtil resize(struct ArrayUtil a1,int);
+ArrayUtil create(int,int);
+int areEqual(ArrayUtil a1,ArrayUtil a2);
+ArrayUtil resize(ArrayUtil a1,int);
